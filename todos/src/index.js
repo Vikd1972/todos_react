@@ -15,7 +15,7 @@ class TodoApp extends React.Component {
       <div className="todolist">
         <h3 className="titel">TODO List</h3>
         <form className="addNewNote" onSubmit={this.addRecord}>
-          <button className="submitNote">&#10515;</button>
+          <button className="submitNote">&#x2611;</button>
           <input
             className="newNote"
             placeholder="New note"
@@ -24,7 +24,7 @@ class TodoApp extends React.Component {
           />
           <button className="submitNote">+</button>
         </form>
-        <TodoList items={this.state.items} />
+        <TodoRecord items={this.state.items} />
       </div>
     );
   }
@@ -36,6 +36,7 @@ class TodoApp extends React.Component {
   addRecord(e) {
     e.preventDefault();
     if (this.state.text.length === 0) {
+
       return;
     }
     const newItem = {
@@ -49,7 +50,13 @@ class TodoApp extends React.Component {
   }
 }
 
-class TodoList extends React.Component {
+
+
+
+
+
+
+class TodoRecord extends React.Component {
   render() {
     return (
       <div className="listNote">

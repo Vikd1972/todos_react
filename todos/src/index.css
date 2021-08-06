@@ -40,10 +40,12 @@ body {
   margin-left: 0px;
   border: none;
   background-color: #ffffff;
+  color: #aaaaaa;
 }
 
 .submitNote:hover {
   background-color: #cccccc;
+  color: #000000;
 }
 
 /*.listNote {

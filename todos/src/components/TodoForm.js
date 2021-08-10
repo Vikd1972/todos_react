@@ -1,4 +1,5 @@
 import React from "react";
+import styles from "./Todoform.module.css";
 
 class TodoForm extends React.Component {
   constructor(props) {
@@ -25,15 +26,15 @@ class TodoForm extends React.Component {
 
   render() {
     return (
-      <form onSubmit={this.submitForm} className="addNewNote">
+      <form onSubmit={this.submitForm} className={styles.add_new_note}>
         <input
           type="text"
-          className="newNote"
+          className={styles.new_note}
           placeholder="Enter task"
           onChange={this.updateText}
           value={this.state.task}
         />
-        <button className="submitNote">+</button>
+        <button className={styles.submit_note}>+</button>
       </form>
     );
   }

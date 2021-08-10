@@ -1,12 +1,12 @@
 import React from "react";
+import styles from './TodoNotes.module.css';
 
 class TodoNotes extends React.Component {
   render() {
-    
     let notes = this.props.items.map((note, i) => {
       return (
-        <div key={i} className="record">
-          <div className="submitNote sub">
+        <div key={i} className={styles.record}>
+          <div className={styles.submit_note}>
             <input
               type="checkbox"
               checked={this.props.items[i].done}
@@ -14,11 +14,13 @@ class TodoNotes extends React.Component {
             />
           </div>
 
-          <div className="itemNote">{note.text}</div>
+          <div className={ `${styles.item_note} ${
+              this.props.items[i].done ? styles.done_note : ""
+            }`}> {note.text}</div>
 
           <div
             onClick={() => this.props.clickAction(i)}
-            className="submitNote sub"
+            className={styles.submit_note }
           >
             -
           </div>

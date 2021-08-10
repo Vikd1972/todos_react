@@ -1,0 +1,31 @@
+.submit_note {
+  height: auto;
+  width: 42px;
+  font-size: 30px;
+  font-weight: 700;
+  border: none;
+  background-color: #ffffff;
+  color: #aaaaaa;
+  text-align: center;
+}
+.submit_note:hover {
+  background-color: #cccccc;
+  color: #000000;
+}
+.item_note {
+  list-style-type: none;
+  font-size: 18px;
+  width: 100%;
+  min-height: 42px;
+  background-color: #ffffff;
+  padding-left: 10px;
+  line-height: 40px;
+}
+.done_note {
+  color: #888888;
+  text-decoration: line-through;
+}
+.record {
+  display: flex;
+  border-top: 1px solid #000000;
+}

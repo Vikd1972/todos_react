@@ -1,0 +1,31 @@
+.todolist {
+  display: flex;
+  flex-direction: column;
+  width: 365px;
+  margin: 0 auto;
+}
+.titel {
+  color: #0f262c;
+  font-size: 24px;
+  margin: 10px 0;
+  margin: 10px auto;
+}
+.row {
+  display: flex;
+}
+.submit_note {
+  height: 42px;
+  width: 42px;
+  font-size: 30px;
+  margin-left: 0px;
+  font-weight: 700;
+  border: none;
+  background-color: #ffffff;
+  color: #aaaaaa;
+  text-align: center;
+}
+.submit_note:hover {
+  background-color: #cccccc;
+  color: #000000;
+}
+

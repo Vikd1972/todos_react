@@ -1,6 +1,7 @@
 import React from "react";
 import TodoNotes from "./TodoNotes";
 import TodoForm from "./TodoForm";
+import styles from "./Todolist.module.css"
 
 class TodoList extends React.Component {
   constructor(props) {
@@ -28,27 +29,26 @@ class TodoList extends React.Component {
   };
 
   selectAll = (checked) => {
-  
     console.log(checked);
-    let newItems = [...this.state.items];
-    newItems.forEach(() => { newItems.done = checked });
-       console.log(checked);
-    this.setState({ items: newItems });
+    //let newItems = [...this.state.items];
+    //newItems.forEach(() => { newItems.done = checked });
+    //  console.log(checked);
+    //this.setState({ items: newItems });
   };
 
   render() {
-    let checked = false;
-    
+    let checked;
+
     return (
-      <div className="todolist">
-        <h3 className="titel">TODO List</h3>
-        <div className="row">
-          <div className="submitNote" onClick={this.selectAll(checked)}>
+      <div className={styles.todolist}>
+        <h3 className={styles.titel}>TODO List</h3>
+        <div className={styles.row}>
+          <div className={styles.submit_note} onClick={this.selectAll(checked)}>
             <input
               type="checkbox"
-              bsSize="large"
-              checked
-              onChange={this.selectAll}
+              size="large"
+              
+              //onChange={this.selectAll(checked)}
             />
           </div>
 
@@ -59,6 +59,7 @@ class TodoList extends React.Component {
           items={this.state.items}
           clickAction={this.deleteItem}
           changeNote={this.changeNote}
+          
         />
       </div>
     );

@@ -1,0 +1,25 @@
+.submit_note {
+  height: 42px;
+  width: 42px;
+  font-size: 30px;
+  margin-left: 0px;
+  font-weight: 700;
+  border: none;
+  background-color: #ffffff;
+  color: #aaaaaa;
+  text-align: center;
+}
+.submit_note:hover {
+  background-color: #cccccc;
+  color: #000000;
+}
+.add_new_note {
+  display: flex;
+  width: 100%;
+}
+.new_note {
+  width: 100%;
+  height: 40px;
+  padding-left: 10px;
+  border: none;
+}

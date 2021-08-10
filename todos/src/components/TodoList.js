@@ -11,7 +11,7 @@ class TodoList extends React.Component {
     this.state = {
       items: [],
       dones: false,
-      show: "",
+      show: "all",
     };
   }
 

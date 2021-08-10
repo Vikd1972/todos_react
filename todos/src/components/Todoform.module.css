@@ -11,8 +11,6 @@
   cursor: pointer;
   padding: 0;
 }
-
-
 .submit_note:hover {
   background-color: #cccccc;
   color: #000000;

@@ -15,7 +15,7 @@
 }
 .submit_note {
   height: 42px;
-  width: 42px;
+  min-width: 42px;
   font-size: 30px;
   margin-left: 0px;
   font-weight: 700;
@@ -23,7 +23,12 @@
   background-color: #ffffff;
   color: #aaaaaa;
   text-align: center;
+  cursor:pointer;
 }
+.submit_note input {
+ transform: scale(1.5);
+}
+
 .submit_note:hover {
   background-color: #cccccc;
   color: #000000;

@@ -22,7 +22,7 @@ class TodoNotes extends React.Component {
             onClick={() => this.props.clickAction(i)}
             className={styles.submit_note }
           >
-            -
+            x
           </div>
         </div>
       );

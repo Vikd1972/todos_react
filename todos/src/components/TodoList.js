@@ -24,9 +24,18 @@ class TodoList extends React.Component {
     this.setState({ show: newShow });
   };
 
+  changeNote = (idx) => {
+    //let newItems = [...this.state.items];
+
+
+
+
+     // this.setState({ task: e.target.value });
+  }
+
   deleteItem = (idx) => {
     let newItems = [...this.state.items];
-    let id = newItems.findIndex(findID => findID.dateID === idx);
+    let id = newItems.findIndex((findID) => findID.dateID === idx);
     newItems.splice(id, 1);
     this.setState({ items: newItems });
   };
@@ -38,7 +47,6 @@ class TodoList extends React.Component {
         note.done = !note.done;
       }
     }
-
     this.setState({ items: newItems });
   };
 
@@ -50,6 +58,10 @@ class TodoList extends React.Component {
     this.setState({ items: newItems });
     this.setState({ dones: !this.state.dones });
   };
+  clearDone = () => {
+    let newItems = this.state.items.filter((item) => !item.done);
+    this.setState({ items: newItems });
+  }
 
   render() {
     return (
@@ -59,6 +71,7 @@ class TodoList extends React.Component {
         <TodoLabel
           items={this.state.items}
           showAction={this.showList}
+          clearDone={this.clearDone}
         />
 
         <div className={styles.row}>
@@ -78,6 +91,7 @@ class TodoList extends React.Component {
           show={this.state.show}
           clickAction={this.deleteItem}
           selectNote={this.selectNote}
+          changeNote={this.changeNote}
         />
       </div>
     );

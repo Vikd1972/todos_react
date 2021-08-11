@@ -4,23 +4,18 @@ import styles from "./TodoNotes.module.css";
 class TodoNotes extends React.Component {
   render() {
     let newItems = [];
-    let newNotes = this.props.show;
 
-    switch (newNotes) {
+    switch (this.props.show) {
       case "all":
         newItems = this.props.items;
         break;
 
       case "done":
-        for (let rec of this.props.items) {
-          if (rec.done) newItems.push(rec);
-        }
+        newItems = this.props.items.filter(item => item.done);
         break;
 
       case "left":
-        for (let rec of this.props.items) {
-          if (!rec.done) newItems.push(rec);
-        }
+         newItems = this.props.items.filter((item) => !item.done);
         break;
       default:
     }
@@ -37,11 +32,22 @@ class TodoNotes extends React.Component {
           </div>
 
           <div
+            onClick={() => this.props.changeNote(note.dateID)}
             className={`${styles.item_note} ${
               note.done ? styles.done_note : ""
             }`}
           >
-            {note.text}
+            <form>
+              <textarea
+                type="text"
+                //className={styles.new_note}
+                // placeholder="Enter task"
+                onChange={this.updateText}
+                value={note.text}
+              />
+            </form>
+
+            
           </div>
 
           <div

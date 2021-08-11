@@ -26,6 +26,12 @@ class TodoLabel extends React.Component {
         <div onClick={() => this.showList("left")} className={styles.quantity}>
           Left - {quantity_left}
         </div>
+        <div
+          onClick={() => this.props.clearDone()}
+          className={`${styles.quantity} ${styles.clear}`}
+        >
+          Clear done ({quantity_done})
+        </div>
       </div>
     );
   }

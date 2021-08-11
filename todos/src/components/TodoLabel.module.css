@@ -9,12 +9,15 @@ padding: 3px;
   font-size: 20px;
 }
 .quantity {
-  min-width: 115px;
+  min-width: 75px;
   height: auto;
   text-align: center;
   cursor: pointer;
   border: 1px solid #bbbbbb;
   border-radius: 4px;
+}
+.clear {
+  min-width: 110px;
 }
 .quantity:hover {
   background-color: #bbbbbb;

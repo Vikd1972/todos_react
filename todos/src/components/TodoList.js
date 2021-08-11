@@ -26,13 +26,19 @@ class TodoList extends React.Component {
 
   deleteItem = (idx) => {
     let newItems = [...this.state.items];
-    newItems.splice(idx, 1);
+    let id = newItems.findIndex(findID => findID.dateID === idx);
+    newItems.splice(id, 1);
     this.setState({ items: newItems });
   };
 
   selectNote = (idx) => {
     let newItems = [...this.state.items];
-    newItems[idx].done = !newItems[idx].done;
+    for (let note of newItems) {
+      if (note.dateID === idx) {
+        note.done = !note.done;
+      }
+    }
+
     this.setState({ items: newItems });
   };
 
@@ -50,7 +56,10 @@ class TodoList extends React.Component {
       <div className={styles.todolist}>
         <h3 className={styles.titel}>TODO List</h3>
 
-        <TodoLabel items={this.state.items} showAction={this.showList} />
+        <TodoLabel
+          items={this.state.items}
+          showAction={this.showList}
+        />
 
         <div className={styles.row}>
           <div className={styles.submit_note}>
@@ -66,6 +75,7 @@ class TodoList extends React.Component {
 
         <TodoNotes
           items={this.state.items}
+          show={this.state.show}
           clickAction={this.deleteItem}
           selectNote={this.selectNote}
         />

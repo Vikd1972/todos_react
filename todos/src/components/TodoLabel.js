@@ -21,7 +21,7 @@ class TodoLabel extends React.Component {
           All - {quantity_all}
         </div>
         <div onClick={() => this.showList("done")} className={styles.quantity}>
-          Completed - {quantity_done}
+          Done - {quantity_done}
         </div>
         <div onClick={() => this.showList("left")} className={styles.quantity}>
           Left - {quantity_left}

@@ -1,17 +1,20 @@
 .label {
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
   justify-content: space-between;
-
+padding: 3px;
   background-color: #ffffff;
   color: #555555;
   font-size: 20px;
 }
 .quantity {
-  width: 120px;
+  min-width: 115px;
   height: auto;
   text-align: center;
   cursor: pointer;
+  border: 1px solid #bbbbbb;
+  border-radius: 4px;
 }
 .quantity:hover {
   background-color: #bbbbbb;

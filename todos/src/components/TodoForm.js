@@ -16,11 +16,10 @@ class TodoForm extends React.Component {
     if (this.state.task.length === 0) {
       return;
     }
-
     this.props.submitAction({
       text: this.state.task,
       done: false,
-      dateID: new Date().getTime() ,
+      dateID: new Date().getTime(),
     });
     this.setState({ task: "" });
   };

@@ -2,14 +2,33 @@ import React from "react";
 import styles from "./TodoNotes.module.css";
 
 class TodoNotes extends React.Component {
+  state = {
+    style: "hide",
+    changeTask: "",
+    changeID: "",
+  };
+
   changeNote = (idx) => {
-    this.props.changeStyle();
+    this.setState({ style: "block" });
     let newItems = [...this.props.items];
     for (let note of newItems) {
       if (note.dateID === idx) {
-        this.props.changeNote(note.text, note.dateID);
+        this.setState({ changeTask: note.text, changeID: note.dateID });
       }
     }
+  };
+
+  updateText = (e) => {
+    this.setState({ changeTask: e.target.value });
+  };
+
+  submitTask = (e) => {
+    e.preventDefault();
+    if (this.state.changeTask === "") {
+      this.props.clickAction(this.state.changeID);
+    }
+    this.props.changeNote(this.state.changeTask, this.state.changeID);
+    this.setState({ style: "hide", changeTask: "", changeID: "" });
   };
 
   render() {
@@ -43,18 +62,28 @@ class TodoNotes extends React.Component {
 
           <div
             onClick={() => this.changeNote(note.dateID)}
-            className={`${styles.item_note} ${
-              note.done ? styles.done_note : ""
-            }`}
+            className={`${styles.item_note} 
+            ${note.done ? styles.done_note : ""}`}
           >
-            {note.text}
+            {this.state.changeID === note.dateID ? (
+              <form onSubmit={this.submitTask}>
+                <input
+                  className={styles.change_form}
+                  type="text"
+                  onChange={this.updateText}
+                  value={this.state.changeTask}
+                />
+              </form>
+            ) : (
+              <div>{note.text}</div>
+            )}
           </div>
 
           <div
             onClick={() => this.props.clickAction(note.dateID)}
             className={styles.submit_note}
           >
-            x
+            -
           </div>
         </div>
       );

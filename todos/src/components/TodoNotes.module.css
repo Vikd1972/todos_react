@@ -29,8 +29,10 @@
 }
 .item_note input {
   border: none;
+  tabindex: 1;
   width: 100%;
   min-height: 40px;
+  box-sizing: border-box;
 }
 .done_note {
   color: #888888;
@@ -40,3 +42,4 @@
   display: flex;
   border-top: 1px solid #000000;
 }
+

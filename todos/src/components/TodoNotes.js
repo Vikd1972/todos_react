@@ -26,9 +26,10 @@ class TodoNotes extends React.Component {
     e.preventDefault();
     if (this.state.changeTask === "") {
       this.props.clickAction(this.state.changeID);
+      return;
     }
     this.props.changeNote(this.state.changeTask, this.state.changeID);
-    this.setState({ style: "hide", changeTask: "", changeID: "" });
+    this.setState({ style: "hide" });
   };
 
   render() {

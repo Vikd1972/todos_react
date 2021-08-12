@@ -66,19 +66,22 @@ class TodoNotes extends React.Component {
             className={`${styles.item_note} 
             ${note.done ? styles.done_note : ""}`}
           >
-            {this.state.changeID === note.dateID ? (
-              <form onSubmit={this.submitTask}>
-                <input
-                  className={styles.change_form}
-                  type="text"
-                  onChange={this.updateText}
-                  value={this.state.changeTask}
-                />
-              </form>
-            ) : (
-              <div>{note.text}</div>
-            )}
-          </div>
+            
+             {this.state.style === "block" ? (
+              this.state.changeID === note.dateID ? (
+                <form onSubmit={this.submitTask}>
+                  <input
+                    className={styles.change_form}
+                    type="text"
+                    onChange={this.updateText}
+                    value={this.state.changeTask}
+                  />
+                </form>
+              ) : (
+                <div>{note.text}</div>
+              )) : (<div>{note.text}</div>)}
+          
+            </div>
 
           <div
             onClick={() => this.props.clickAction(note.dateID)}

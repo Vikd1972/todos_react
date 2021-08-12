@@ -5,35 +5,29 @@ import TodoLabel from "./TodoLabel";
 import styles from "./Todolist.module.css";
 
 class TodoList extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      items: [],
-      dones: false,
-      show: "all",
-      changeTask: "",
-      changeID: "",
-      style: "hide",
-    };
-  }
-
-  addItem = (item) => {
-    let newItems = this.state.items;
-    this.setState({ items: [...newItems, item] });
+  state = {
+    items: [],
+    dones: false,
+    show: "all",
+    changeTask: "",
+    changeID: "",
+    style: "hide",
   };
 
   changeStyle = () => {
     this.setState({ style: "block" });
-    console.log(this.state.style);
-  }
+  };
 
   showList = (newShow) => {
     this.setState({ show: newShow });
   };
 
+  addItem = (item) => {
+    this.setState({ items: [...this.state.items, item] });
+  };
+
   changeNote = (note, idx) => {
-    this.setState({ changeTask: note }, () => console.log());
-    this.setState({ changeID: idx }, () => console.log());
+    this.setState({ changeTask: note, changeID: idx });
   };
 
   updateText = (e) => {
@@ -48,8 +42,7 @@ class TodoList extends React.Component {
         note.text = this.state.changeTask;
       }
     }
-    this.setState({ items: newItems });
-     this.setState({ style: "hide" });
+    this.setState({ items: newItems, style: "hide" });
   };
 
   deleteItem = (idx) => {
@@ -74,8 +67,7 @@ class TodoList extends React.Component {
     for (let rec of newItems) {
       rec.done = !this.state.dones;
     }
-    this.setState({ items: newItems });
-    this.setState({ dones: !this.state.dones });
+    this.setState({ items: newItems, dones: !this.state.dones });
   };
 
   clearDone = () => {
@@ -87,49 +79,46 @@ class TodoList extends React.Component {
     return (
       <div className={styles.todolist}>
         <h3 className={styles.titel}>TODO List</h3>
-        <TodoLabel
-          items={this.state.items}
-          showAction={this.showList}
-          clearDone={this.clearDone}
-        />
-       
-        <div
-          className={`${styles.change_task} ${
-            this.state.style === "hide"
-              ? styles.change_task_hide
-              : styles.change_task_block
-          }`}
-        >
-          <form onSubmit={this.submitTask}>
-            <input
-              type="text"
-              onChange={this.updateText}
-              value={this.state.changeTask}
-            />
-          </form>
-        </div>
-
-        <div className={styles.row}>
-          <div className={styles.submit_note}>
-            <input
-              type="checkbox"
-              checked={this.state.dones}
-              onChange={this.selectAll}
-            />
+        <div className={styles.todo}>
+          <TodoLabel
+            items={this.state.items}
+            showAction={this.showList}
+            clearDone={this.clearDone}
+          />
+          <div
+            className={`${styles.change_task} ${
+              this.state.style === "hide"
+                ? styles.change_task_hide
+                : styles.change_task_block
+            }`}
+          >
+            <form onSubmit={this.submitTask}>
+              <input
+                type="text"
+                onChange={this.updateText}
+                value={this.state.changeTask}
+              />
+            </form>
           </div>
-          <TodoForm submitAction={this.addItem} />
+          <div className={styles.row}>
+            <div className={styles.submit_note}>
+              <input
+                type="checkbox"
+                checked={this.state.dones}
+                onChange={this.selectAll}
+              />
+            </div>
+            <TodoForm submitAction={this.addItem} />
+          </div>
+          <TodoNotes
+            items={this.state.items}
+            show={this.state.show}
+            clickAction={this.deleteItem}
+            changeNote={this.changeNote}
+            selectNote={this.selectNote}
+            changeStyle={this.changeStyle}
+          />
         </div>
-        
-        <TodoNotes
-          items={this.state.items}
-          show={this.state.show}
-          style={this.state.style}
-          changeTask={this.state.changeTask}
-          clickAction={this.deleteItem}
-          changeNote={this.changeNote}
-          selectNote={this.selectNote}
-          changeStyle={this.changeStyle}
-        />
       </div>
     );
   }

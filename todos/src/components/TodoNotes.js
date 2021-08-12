@@ -2,7 +2,6 @@ import React from "react";
 import styles from "./TodoNotes.module.css";
 
 class TodoNotes extends React.Component {
-  
   changeNote = (idx) => {
     this.props.changeStyle();
     let newItems = [...this.props.items];

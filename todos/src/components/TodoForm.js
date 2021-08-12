@@ -2,10 +2,7 @@ import React from "react";
 import styles from "./Todoform.module.css";
 
 class TodoForm extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = { task: "" };
-  }
+   state = { task: "" };
 
   updateText = (e) => {
     this.setState({ task: e.target.value });

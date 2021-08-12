@@ -16,6 +16,7 @@
   cursor: pointer;
   border: 1px solid #bbbbbb;
   border-radius: 4px;
+  text-shadow: 2px 2px 5px #333333;
 }
 .clear {
   width: 110px;

@@ -2,11 +2,7 @@ import React from "react";
 import styles from "./TodoLabel.module.css";
 
 class TodoLabel extends React.Component {
-  showList = (filter) => {
-    this.props.showAction(filter);
-  };
-
-  render() {
+   render() {
     let newItems = [...this.props.items];
     let quantity_all = newItems.length;
     let quantity_done = 0;
@@ -17,13 +13,22 @@ class TodoLabel extends React.Component {
 
     return (
       <div className={styles.label}>
-        <div onClick={() => this.showList("all")} className={styles.quantity}>
+        <div
+          onClick={() => this.props.showAction("all")}
+          className={styles.quantity}
+        >
           All - {quantity_all}
         </div>
-        <div onClick={() => this.showList("done")} className={styles.quantity}>
+        <div
+          onClick={() => this.props.showAction("done")}
+          className={styles.quantity}
+        >
           Done - {quantity_done}
         </div>
-        <div onClick={() => this.showList("left")} className={styles.quantity}>
+        <div
+          onClick={() => this.props.showAction("left")}
+          className={styles.quantity}
+        >
           Left - {quantity_left}
         </div>
         <div

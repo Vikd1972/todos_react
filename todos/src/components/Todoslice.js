@@ -5,7 +5,7 @@ export const todoSlice = createSlice({
   initialState: [
     { text: "todo1", done: false, dateID: 1 },
     { text: "todo2", done: true, dateID: 2 },
-    { text: "todo2", done: false, dateID: 3 },
+    { text: "todo3", done: false, dateID: 3 },
   ],
   reducers: {
     addNote: (state, action) => {
@@ -17,15 +17,18 @@ export const todoSlice = createSlice({
       state.push(item);
     },
     selectNote: (state, action) => {
-        return state.map((item) =>
+      return state.map((item) =>
         item.dateID === action.payload.dateID
           ? { ...item, done: !item.done }
           : item
       );
-     },
+    },
+    deleteNote: (state, action) => {
+      return state.filter((item) => item.dateID !== action.payload.dateID);
+    },
   },
 });
 
-export const { addNote, selectNote } = todoSlice.actions;
+export const { addNote, selectNote, deleteNote } = todoSlice.actions;
 
 export default todoSlice.reducer;

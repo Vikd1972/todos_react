@@ -1,7 +1,5 @@
 import React from "react";
 import { connect } from "react-redux";
-//import { useDispatch } from "react-redux";
-//import { selectNote } from "./Todoslice";
 import TodoNotes from "./TodoNotes";
 import TodoForm from "./TodoForm";
 import TodoLabel from "./TodoLabel";
@@ -35,12 +33,12 @@ class TodoList extends React.Component {
     this.setState({ items: newItems });
   };
 
-  deleteItem = (idx) => {
-    let newItems = [...this.state.items];
-    let id = newItems.findIndex((findID) => findID.dateID === idx);
-    newItems.splice(id, 1);
-    this.setState({ items: newItems });
-  };
+  //deleteItem = (idx) => {
+  //  let newItems = [...this.state.items];
+  //  let id = newItems.findIndex((findID) => findID.dateID === idx);
+  //  newItems.splice(id, 1);
+  //  this.setState({ items: newItems });
+  //};
 
   selectAll = () => {
     let newItems = [...this.state.items];
@@ -77,7 +75,7 @@ class TodoList extends React.Component {
           <TodoNotes
             items={this.state.items}
             show={this.state.show}
-            clickAction={this.deleteItem}
+           // clickAction={this.deleteItem}
             changeNote={this.changeNote}
             selectNote={this.selectNote}
           />

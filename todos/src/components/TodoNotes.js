@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { selectNote } from "./Todoslice";
+import { selectNote, deleteNote } from "./Todoslice";
 import { useDispatch } from "react-redux";
 import styles from "./TodoNotes.module.css";
 
@@ -9,10 +9,15 @@ const TodoNotes = (props) => {
   let changeTask = "";
   let changeID = "";
   const dispatch = useDispatch();
-  
-  const SelectNotes = (dateID) => {
+
+  const SelectNote = (dateID) => {
     dispatch(selectNote({ dateID }));
   };
+
+  const DeleteNote = (dateID) => {
+    dispatch(deleteNote({ dateID }));
+  };
+
 
   const changeNote = (idx) => {
     style = "block";
@@ -62,7 +67,7 @@ const TodoNotes = (props) => {
           <input
             type="checkbox"
             checked={note.done}
-            onChange={() => SelectNotes(note.dateID)}
+            onChange={() => SelectNote(note.dateID)}
           />
         </div>
 
@@ -90,7 +95,7 @@ const TodoNotes = (props) => {
         </div>
 
         <div
-          onClick={() => props.clickAction(note.dateID)}
+          onClick={() => DeleteNote(note.dateID)}
           className={styles.submit_note}
         >
           -
@@ -99,7 +104,6 @@ const TodoNotes = (props) => {
     );
   });
   return <div>{notes}</div>;
-
 };
 
 function mapStateToProps(state) {
@@ -109,4 +113,3 @@ function mapStateToProps(state) {
 }
 
 export default connect(mapStateToProps, null)(TodoNotes);
-

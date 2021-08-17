@@ -1,8 +1,13 @@
 import React from "react";
+import { connect } from "react-redux";
 import styles from "./TodoLabel.module.css";
 
 class TodoLabel extends React.Component {
-   render() {
+  returnItems() {
+    return this.props.items;
+  }
+
+  render() {
     let newItems = [...this.props.items];
     let quantity_all = newItems.length;
     let quantity_done = 0;
@@ -42,4 +47,12 @@ class TodoLabel extends React.Component {
   }
 }
 
-export default TodoLabel;
+function mapStateToProps(state) {
+  
+  return {
+    items: state.items,
+  };
+}
+
+
+export default connect(mapStateToProps, null) (TodoLabel);

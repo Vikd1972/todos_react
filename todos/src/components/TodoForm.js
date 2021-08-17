@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { addTodo } from "./Todoslice";
+import { addNote } from "./Todoslice";
 
 import styles from "./Todoform.module.css";
 
@@ -12,12 +12,9 @@ const TodoForm = () => {
   const onSubmit = (event) => {
     event.preventDefault();
     if (value) {
-      dispatch(
-        addTodo({
-          text: value,
-        })
-      );
+      dispatch(addNote({text: value,}));
     }
+    setValue("");
   };
 
   return (

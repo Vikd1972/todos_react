@@ -1,4 +1,7 @@
 import React from "react";
+import { connect } from "react-redux";
+//import { useDispatch } from "react-redux";
+//import { selectNote } from "./Todoslice";
 import TodoNotes from "./TodoNotes";
 import TodoForm from "./TodoForm";
 import TodoLabel from "./TodoLabel";
@@ -6,10 +9,13 @@ import styles from "./Todolist.module.css";
 
 class TodoList extends React.Component {
   state = {
-    items: [],
     dones: false,
     show: "all",
   };
+
+  returnItems() {
+    return this.props.items;
+  }
 
   showList = (newShow) => {
     this.setState({ show: newShow });
@@ -36,16 +42,6 @@ class TodoList extends React.Component {
     this.setState({ items: newItems });
   };
 
-  selectNote = (idx) => {
-    let newItems = [...this.state.items];
-    for (let note of newItems) {
-      if (note.dateID === idx) {
-        note.done = !note.done;
-      }
-    }
-    this.setState({ items: newItems });
-  };
-
   selectAll = () => {
     let newItems = [...this.state.items];
     for (let rec of newItems) {
@@ -65,11 +61,7 @@ class TodoList extends React.Component {
         <h3 className={styles.titel}>TODO List</h3>
 
         <div className={styles.todo}>
-          <TodoLabel
-            items={this.state.items}
-            showAction={this.showList}
-            clearDone={this.clearDone}
-          />
+          <TodoLabel showAction={this.showList} clearDone={this.clearDone} />
 
           <div className={styles.row}>
             <div className={styles.submit_note}>
@@ -95,4 +87,10 @@ class TodoList extends React.Component {
   }
 }
 
-export default TodoList;
+function mapStateToProps(state) {
+  return {
+    items: state.items,
+  };
+}
+
+export default connect(mapStateToProps, null)(TodoList);

@@ -1,12 +1,24 @@
 import React from "react";
+import { connect } from "react-redux"; 
+//import { useSelector, useDispatch } from "react-redux";
+//import { selectNote } from "./Todoslice";
 import styles from "./TodoNotes.module.css";
 
+
 class TodoNotes extends React.Component {
-  state = {
-    style: "hide",
-    changeTask: "",
-    changeID: "",
-  };
+  constructor(props) {
+    super(props);
+    this.returnItems = this.returnItems.bind(this);
+    this.state = {
+      style: "hide",
+      changeTask: "",
+      changeID: "",
+    };
+  }
+
+  returnItems() {
+    return this.props.items;
+  }
 
   changeNote = (idx) => {
     this.setState({ style: "block" });
@@ -66,8 +78,7 @@ class TodoNotes extends React.Component {
             className={`${styles.item_note} 
             ${note.done ? styles.done_note : ""}`}
           >
-            
-             {this.state.style === "block" ? (
+            {this.state.style === "block" ? (
               this.state.changeID === note.dateID ? (
                 <form onSubmit={this.submitTask}>
                   <input
@@ -79,9 +90,11 @@ class TodoNotes extends React.Component {
                 </form>
               ) : (
                 <div>{note.text}</div>
-              )) : (<div>{note.text}</div>)}
-          
-            </div>
+              )
+            ) : (
+              <div>{note.text}</div>
+            )}
+          </div>
 
           <div
             onClick={() => this.props.clickAction(note.dateID)}
@@ -96,4 +109,11 @@ class TodoNotes extends React.Component {
   }
 }
 
-export default TodoNotes;
+function mapStateToProps(state) {
+  return {
+    Items: state.Items,
+  };
+}
+
+
+export default connect(mapStateToProps, null) (TodoNotes);

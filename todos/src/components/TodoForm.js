@@ -1,40 +1,39 @@
-import React from "react";
+import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+import { addTodo } from "./Todoslice";
+
 import styles from "./Todoform.module.css";
 
-class TodoForm extends React.Component {
-   state = { task: "" };
 
-  updateText = (e) => {
-    this.setState({ task: e.target.value });
-  };
+const TodoForm = () => {
+  const [value, setValue] = useState("");
+  const dispatch = useDispatch();
 
-  submitForm = (e) => {
-    e.preventDefault();
-    if (this.state.task.length === 0) {
-      return;
+  const onSubmit = (event) => {
+    event.preventDefault();
+    if (value) {
+      dispatch(
+        addTodo({
+          text: value,
+        })
+      );
     }
-    this.props.submitAction({
-      text: this.state.task,
-      done: false,
-      dateID: new Date().getTime(),
-    });
-    this.setState({ task: "" });
   };
 
-  render() {
-    return (
-      <form onSubmit={this.submitForm} className={styles.add_new_note}>
-        <input
-          type="text"
-          className={styles.new_note}
-          placeholder="Enter task"
-          onChange={this.updateText}
-          value={this.state.task}
-        />
-        <button className={styles.submit_note}>+</button>
-      </form>
-    );
-  }
-}
+  return (
+    <form onSubmit={onSubmit} className={styles.add_new_note}>
+      <input
+        type="text"
+        className={styles.new_note}
+        placeholder="Enter task"
+        value={value}
+        onChange={(event) => setValue(event.target.value)}
+      ></input>
+      <button type="submit" className={styles.submit_note}>
+       +
+      </button>
+    </form>
+  );
+};
 
 export default TodoForm;

@@ -20,6 +20,7 @@ const TodoNotes = (props) => {
 
   const changeNote = (idx) => {
     style = "block";
+    
     let newItems = [...props.items];
     for (let note of newItems) {
       if (note.dateID === idx) {

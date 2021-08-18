@@ -26,9 +26,12 @@ export const todoSlice = createSlice({
     deleteNote: (state, action) => {
       return state.filter((item) => item.dateID !== action.payload.dateID);
     },
+    deleteDone: (state, action) => {
+      return state.filter((item) => item.done !== true);
+    },
   },
 });
 
-export const { addNote, selectNote, deleteNote } = todoSlice.actions;
+export const { addNote, selectNote, deleteNote, deleteDone } = todoSlice.actions;
 
 export default todoSlice.reducer;

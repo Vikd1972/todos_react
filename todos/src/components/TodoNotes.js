@@ -18,7 +18,6 @@ const TodoNotes = (props) => {
     dispatch(deleteNote({ dateID }));
   };
 
-
   const changeNote = (idx) => {
     style = "block";
     let newItems = [...props.items];

@@ -13,6 +13,7 @@ export const getShowNotes = createSelector(
         return notes.filter((item) => item.done);
       case "LEFT":
         return notes.filter((item) => !item.done);
+      default:
     }
   }
 );

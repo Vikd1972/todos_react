@@ -13,14 +13,6 @@ const TodoNotes = (props) => {
 
   const notes = useSelector(getShowNotes);
 
-  const SelectNote = (dateID) => {
-    dispatch(selectNote({ dateID }));
-  };
-
-  const DeleteNote = (dateID) => {
-    dispatch(deleteNote({ dateID }));
-  };
-
   const changeNote = (idx) => {
     style = "block";
 
@@ -46,8 +38,9 @@ const TodoNotes = (props) => {
     this.setState({ style: "hide" });
   };
 
+
   let noteList =
-    notes &&
+    //notes &&
     notes.map((note) => {
       return (
         <div key={note.dateID} className={styles.record}>
@@ -55,7 +48,7 @@ const TodoNotes = (props) => {
             <input
               type="checkbox"
               checked={note.done}
-              onChange={() => SelectNote(note.dateID)}
+              onChange={() => dispatch(selectNote({ dateID: note.dateID }))}
             />
           </div>
 
@@ -83,7 +76,7 @@ const TodoNotes = (props) => {
           </div>
 
           <div
-            onClick={() => DeleteNote(note.dateID)}
+            onClick={() => dispatch(deleteNote({ dateID: note.dateID }))}
             className={styles.submit_note}
           >
             -

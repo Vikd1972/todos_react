@@ -2,11 +2,15 @@ import { createSlice } from "@reduxjs/toolkit";
 
 export const todoSlice = createSlice({
   name: "items",
-  initialState: [
-    { text: "todo1", done: false, dateID: 1 },
-    { text: "todo2", done: true, dateID: 2 },
-    { text: "todo3", done: false, dateID: 3 },
-  ],
+  initialState: {
+    notes: [
+      { text: "todo1", done: false, dateID: 1 },
+      { text: "todo2", done: true, dateID: 2 },
+      { text: "todo3", done: false, dateID: 3 },
+    ],
+    show: "ALL",
+  },
+
   reducers: {
     addNote: (state, action) => {
       const item = {
@@ -14,29 +18,50 @@ export const todoSlice = createSlice({
         done: false,
         dateID: new Date().getTime(),
       };
-      state.push(item);
+      state.notes.push(item);
     },
+
     selectNote: (state, action) => {
-      return state.map((item) =>
-        item.dateID === action.payload.dateID
-          ? { ...item, done: !item.done }
-          : item
-      );
+      for (let item of state.notes) {
+        if (item.dateID === action.payload.dateID) {
+          item.done = !item.done;
+        }
+      }
     },
+
     selectAll: (state, action) => {
-      for (let item of state) {
+      for (let item of state.notes) {
         item.done = action.payload.dones;
       }
     },
+
     deleteNote: (state, action) => {
-      return state.filter((item) => item.dateID !== action.payload.dateID);
+      const index = state.notes.findIndex(
+        (item) => item.dateID === action.payload.dateID
+      );
+      state.notes.splice(index, 1);
     },
+
     deleteDone: (state, action) => {
-      return state.filter((item) => item.done !== true);
+      console.log(state.notes);
+      return {
+        ...state,
+        notes: state.notes.filter((item) => item.done === false)}
+    },
+    
+    showFilter: (state, action) => {
+      state.show = action.payload;
     },
   },
 });
 
-export const { addNote, selectNote, selectAll, deleteNote, deleteDone } = todoSlice.actions;
+export const {
+  addNote,
+  selectNote,
+  selectAll,
+  deleteNote,
+  deleteDone,
+  showFilter,
+} = todoSlice.actions;
 
 export default todoSlice.reducer;

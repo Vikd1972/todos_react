@@ -1,7 +1,8 @@
 import React from "react";
-import { connect } from "react-redux";
+import { useSelector } from "react-redux";
 import { selectNote, deleteNote } from "./Todoslice";
 import { useDispatch } from "react-redux";
+import { getShowNotes } from "../store/selector";
 import styles from "./TodoNotes.module.css";
 
 const TodoNotes = (props) => {
@@ -9,6 +10,8 @@ const TodoNotes = (props) => {
   let changeTask = "";
   let changeID = "";
   const dispatch = useDispatch();
+
+  const notes = useSelector(getShowNotes);
 
   const SelectNote = (dateID) => {
     dispatch(selectNote({ dateID }));
@@ -20,7 +23,7 @@ const TodoNotes = (props) => {
 
   const changeNote = (idx) => {
     style = "block";
-    
+
     let newItems = [...props.items];
     for (let note of newItems) {
       if (note.dateID === idx) {
@@ -43,73 +46,53 @@ const TodoNotes = (props) => {
     this.setState({ style: "hide" });
   };
 
-  let newItems = [];
+  let noteList =
+    notes &&
+    notes.map((note) => {
+      return (
+        <div key={note.dateID} className={styles.record}>
+          <div className={styles.submit_note}>
+            <input
+              type="checkbox"
+              checked={note.done}
+              onChange={() => SelectNote(note.dateID)}
+            />
+          </div>
 
-  switch (props.show) {
-    case "all":
-      newItems = props.items;
-      break;
-
-    case "done":
-      newItems = props.items.filter((item) => item.done);
-      break;
-
-    case "left":
-      newItems = props.items.filter((item) => !item.done);
-      break;
-    default:
-  }
-
-  let notes = newItems.map((note) => {
-    return (
-      <div key={note.dateID} className={styles.record}>
-        <div className={styles.submit_note}>
-          <input
-            type="checkbox"
-            checked={note.done}
-            onChange={() => SelectNote(note.dateID)}
-          />
-        </div>
-
-        <div
-          onClick={() => changeNote(note.dateID)}
-          className={`${styles.item_note} 
+          <div
+            onClick={() => changeNote(note.dateID)}
+            className={`${styles.item_note} 
             ${note.done ? styles.done_note : ""}`}
-        >
-          {style === "block" ? (
-            changeID === note.dateID ? (
-              <form onSubmit={() => submitTask}>
-                <input
-                  className={styles.change_form}
-                  type="text"
-                  onChange={() => updateText}
-                  value={changeTask}
-                />
-              </form>
+          >
+            {style === "block" ? (
+              changeID === note.dateID ? (
+                <form onSubmit={() => submitTask}>
+                  <input
+                    className={styles.change_form}
+                    type="text"
+                    onChange={() => updateText}
+                    value={changeTask}
+                  />
+                </form>
+              ) : (
+                <div>{note.text}</div>
+              )
             ) : (
               <div>{note.text}</div>
-            )
-          ) : (
-            <div>{note.text}</div>
-          )}
-        </div>
+            )}
+          </div>
 
-        <div
-          onClick={() => DeleteNote(note.dateID)}
-          className={styles.submit_note}
-        >
-          -
+          <div
+            onClick={() => DeleteNote(note.dateID)}
+            className={styles.submit_note}
+          >
+            -
+          </div>
         </div>
-      </div>
-    );
-  });
-  return <div>{notes}</div>;
+      );
+    });
+
+  return <div>{noteList}</div>;
 };
 
-function mapStateToProps(state) {
-  return {
-    items: state.items,
-  };
-}
-
-export default connect(mapStateToProps, null)(TodoNotes);
+export default TodoNotes;

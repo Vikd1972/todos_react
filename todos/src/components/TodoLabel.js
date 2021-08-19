@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { useDispatch } from "react-redux";
-import { deleteDone } from "./Todoslice";
+import { deleteDone, showFilter } from "./Todoslice";
 import styles from "./TodoLabel.module.css";
 
 const TodoLabel = (props) => {
@@ -10,8 +10,12 @@ const TodoLabel = (props) => {
   const DeleteDone = () => {
     dispatch(deleteDone());
   };
+  const ShowFilter = (show) => {
+    dispatch(showFilter(show));
+  }
 
-  let newItems = [...props.items];
+  let newItems = props.items.notes;
+
   let quantity_all = newItems.length;
   let quantity_done = 0;
   for (let rec of newItems) {
@@ -21,13 +25,13 @@ const TodoLabel = (props) => {
 
   return (
     <div className={styles.label}>
-      <div onClick={() => props.showAction("all")} className={styles.quantity}>
+      <div onClick={() => ShowFilter("ALL")} className={styles.quantity}>
         All - {quantity_all}
       </div>
-      <div onClick={() => props.showAction("done")} className={styles.quantity}>
+      <div onClick={() => ShowFilter("DONE")} className={styles.quantity}>
         Done - {quantity_done}
       </div>
-      <div onClick={() => props.showAction("left")} className={styles.quantity}>
+      <div onClick={() => ShowFilter("LEFT")} className={styles.quantity}>
         Left - {quantity_left}
       </div>
       <div

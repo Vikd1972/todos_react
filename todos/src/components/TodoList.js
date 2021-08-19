@@ -8,14 +8,9 @@ import TodoLabel from "./TodoLabel";
 import styles from "./Todolist.module.css";
 
 let dones = false;
-  
-const TodoList = () => {
-  let show = "all";
-  const dispatch = useDispatch();
 
-  const showList = (newShow) => {
-    show = newShow;
-  };
+const TodoList = () => {
+  const dispatch = useDispatch();
 
   const addItem = (item) => {
     this.setState({ items: [...this.state.items, item] });
@@ -41,7 +36,7 @@ const TodoList = () => {
       <h3 className={styles.titel}>TODO List</h3>
 
       <div className={styles.todo}>
-        <TodoLabel showAction={showList} />
+        <TodoLabel />
 
         <div className={styles.row}>
           <div className={styles.submit_note}>
@@ -54,7 +49,7 @@ const TodoList = () => {
           <TodoForm submitAction={addItem} />
         </div>
 
-        <TodoNotes show={show} changeNote={changeNote} />
+        <TodoNotes changeNote={changeNote} />
       </div>
     </div>
   );

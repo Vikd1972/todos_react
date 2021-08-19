@@ -21,6 +21,14 @@ export const todoSlice = createSlice({
       state.notes.push(item);
     },
 
+    changeNote: (state, action) => {
+      for (let item of state.notes) {
+        if (item.dateID === action.payload.dateID) {
+          item.text = action.payload.text;
+        }
+      }
+     },
+
     selectNote: (state, action) => {
       for (let item of state.notes) {
         if (item.dateID === action.payload.dateID) {
@@ -57,6 +65,7 @@ export const todoSlice = createSlice({
 
 export const {
   addNote,
+  changeNote,
   selectNote,
   selectAll,
   deleteNote,

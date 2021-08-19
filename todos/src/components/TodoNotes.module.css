@@ -21,7 +21,7 @@
 .item_note {
   list-style-type: none;
   font-size: 18px;
-  width: 100%;
+  width: 275px;
   min-height: 40px;
   background-color: #ffffff;
   padding-left: 10px;
@@ -29,7 +29,7 @@
 }
 .item_note input {
   border: none;
-  
+
   width: 100%;
   min-height: 40px;
   box-sizing: border-box;
@@ -40,6 +40,7 @@
 }
 .record {
   display: flex;
+  width: 100%;
   border-top: 1px solid #000000;
 }
 

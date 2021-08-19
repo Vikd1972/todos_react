@@ -12,19 +12,19 @@ let dones = false;
 const TodoList = () => {
   const dispatch = useDispatch();
 
-  const addItem = (item) => {
-    this.setState({ items: [...this.state.items, item] });
-  };
+  //const addItem = (item) => {
+  //  this.setState({ items: [...this.state.items, item] });
+  //};
 
-  const changeNote = (newNote, idx) => {
-    let newItems = [...this.state.items];
-    for (let note of newItems) {
-      if (note.dateID === idx) {
-        note.text = newNote;
-      }
-    }
-    this.setState({ items: newItems });
-  };
+  //const changeNote = (newNote, idx) => {
+  //  let newItems = [...this.state.items];
+  //  for (let note of newItems) {
+  //    if (note.dateID === idx) {
+  //      note.text = newNote;
+  //    }
+  //  }
+  //  this.setState({ items: newItems });
+  //};
 
   const SelectAll = () => {
     dones = !dones;
@@ -46,10 +46,10 @@ const TodoList = () => {
               onChange={() => SelectAll()}
             />
           </div>
-          <TodoForm submitAction={addItem} />
+          <TodoForm />
         </div>
 
-        <TodoNotes changeNote={changeNote} />
+        <TodoNotes />
       </div>
     </div>
   );

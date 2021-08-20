@@ -7,15 +7,14 @@ import styles from "./TodoNotes.module.css";
 const TodoNotes = () => {
   const notes = useSelector(getShowNotes);
 
-  let noteList = notes.map((note) => {
+  return <div>{notes.map((note) => {
     return (
       <div key={note.dateID} className={styles.record}>
         <TodoRow note={note} />
       </div>
     );
-  });
-
-  return <div>{noteList}</div>;
+  })
+}</div>;
 };
 
 export default TodoNotes;

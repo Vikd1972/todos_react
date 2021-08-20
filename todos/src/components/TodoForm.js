@@ -4,16 +4,15 @@ import { addNote } from "./Todoslice";
 
 import styles from "./Todoform.module.css";
 
-
 const TodoForm = () => {
   const [value, setValue] = useState("");
   const dispatch = useDispatch();
 
   const onSubmit = (event) => {
     event.preventDefault();
-    if (value) {
-      dispatch(addNote({text: value,}));
-    }
+    if (!value) return
+
+    dispatch(addNote({text: value,}));
     setValue("");
   };
 

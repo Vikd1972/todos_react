@@ -7,21 +7,25 @@ const TodoRow = (props) => {
   const [isEdit, setIsEdit] = useState(false);
   const dispatch = useDispatch();
   const [newvalue, setNewvalue] = useState("changeTask");
+  const {note: newItem} = props;
 
   const change = (text, id) => {
     setIsEdit(!isEdit);
     setNewvalue(text);
   };
 
-  const onSubmit = (e, id) => {
+  const onSubmit = (e) => {
     e.preventDefault();
     if (newvalue) {
-      dispatch(changeNote({ text: newvalue, dateID: id }));
+      dispatch(changeNote({ text: newvalue, dateID: newItem.dateID }));
     }
     setIsEdit(!isEdit);
   };
 
-  let newItem = props.note;
+
+  const onInputChange = () => {
+    dispatch(selectNote({ dateID: newItem.dateID }))
+  }
 
   const noteRow = () => {
     return (
@@ -30,7 +34,7 @@ const TodoRow = (props) => {
           <input
             type="checkbox"
             checked={newItem.done}
-            onChange={() => dispatch(selectNote({ dateID: newItem.dateID }))}
+            onChange={onInputChange}
           />
         </div>
 
@@ -40,7 +44,7 @@ const TodoRow = (props) => {
             ${newItem.done ? styles.done_note : ""}`}
         >
           {isEdit ? (
-            <form onSubmit={(e) => onSubmit(e, newItem.dateID)}>
+            <form onSubmit={onSubmit}>
               <input
                 id="input"
                 className={styles.change_form}

@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useMemo} from "react";
 import { connect } from "react-redux";
 import { useDispatch } from "react-redux";
 import { deleteDone, showFilter } from "./Todoslice";
@@ -7,11 +7,23 @@ import styles from "./TodoLabel.module.css";
 const TodoLabel = (props) => {
   const dispatch = useDispatch();
  
-  let newItems = props.items.notes;
-  let quantity_all = newItems.length;
-  let quantity_done = 0;
-  for (let rec of newItems) {if (rec.done) quantity_done += 1;}
-  let quantity_left = quantity_all - quantity_done;
+  const { quantity_left, quantity_all, quantity_done } = useMemo(() => {
+    
+    const newItems = props.items.notes;
+    const quantity_all = newItems.length;
+    let quantity_done = 0;
+    for (let rec of newItems) {
+      if (rec.done) quantity_done += 1;
+    }
+    const quantity_left = quantity_all - quantity_done;
+    
+    return {
+      quantity_left,
+      quantity_all,
+      quantity_done,
+    };
+  }, [props.items.notes]);
+
 
   return (
     <div className={styles.label}>

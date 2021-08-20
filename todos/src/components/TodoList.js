@@ -1,34 +1,22 @@
-import React from "react";
-import { connect } from "react-redux";
+import React, { useState } from "react";
+//import { connect } from "react-redux";
 import { useDispatch } from "react-redux";
+
 import { selectAll } from "./Todoslice";
+
+import styles from "./Todolist.module.css";
+
 import TodoNotes from "./TodoNotes";
 import TodoForm from "./TodoForm";
 import TodoLabel from "./TodoLabel";
-import styles from "./Todolist.module.css";
-
-let dones = false;
 
 const TodoList = () => {
   const dispatch = useDispatch();
-
-  //const addItem = (item) => {
-  //  this.setState({ items: [...this.state.items, item] });
-  //};
-
-  //const changeNote = (newNote, idx) => {
-  //  let newItems = [...this.state.items];
-  //  for (let note of newItems) {
-  //    if (note.dateID === idx) {
-  //      note.text = newNote;
-  //    }
-  //  }
-  //  this.setState({ items: newItems });
-  //};
-
-  const SelectAll = () => {
-    dones = !dones;
+  const [dones, setDones] = useState(true);
+  const selectAllNotes = () => {
+    
     dispatch(selectAll({ dones }));
+    setDones(!dones);
   };
 
   return (
@@ -40,11 +28,7 @@ const TodoList = () => {
 
         <div className={styles.row}>
           <div className={styles.submit_note}>
-            <input
-              type="checkbox"
-              checked={dones}
-              onChange={() => SelectAll()}
-            />
+            <input type="checkbox" checked={!dones} onChange={selectAllNotes} />
           </div>
           <TodoForm />
         </div>
@@ -55,10 +39,4 @@ const TodoList = () => {
   );
 };
 
-function mapStateToProps(state) {
-  return {
-    items: state.items,
-  };
-}
-
-export default connect(mapStateToProps, null)(TodoList);
+export default TodoList;
